@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shake/shake.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'home_page';
@@ -7,6 +8,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ShakeDetector detector = ShakeDetector.autoStart(onPhoneShake: () {
+    print('The phone is shaking');
+  });
+
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
