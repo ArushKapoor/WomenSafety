@@ -78,9 +78,9 @@ class _HomePageState extends State<HomePage> {
     print(value);
   }
 
-  ShakeDetector detector = ShakeDetector.autoStart(onPhoneShake: () {
-    print('The phone is shaking');
-  });
+  // ShakeDetector detector = ShakeDetector.autoStart(onPhoneShake: () {
+  //   print('The phone is shaking');
+  // });
 
   @override
   Widget build(BuildContext context) {
