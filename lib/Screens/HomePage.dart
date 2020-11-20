@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:flutter/services.dart';
-import 'package:women_safety/configs/applications.dart';
-import 'package:fluro/fluro.dart';
 
 enum HomeOptions { nearByPolice, emergencyContacts, accountSettings, logout }
-=======
-import 'package:shake/shake.dart';
->>>>>>> cf8500e1dbee1516abafc4ca3093346f95eed50d
 
 class HomePage extends StatefulWidget {
   static const String id = 'home_page';
@@ -16,7 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-<<<<<<< HEAD
   List<PopupMenuItem<HomeOptions>> _popupMenus;
   List<Widget> _actionButtons;
   void _selectOption(HomeOptions option) {
@@ -68,11 +61,6 @@ class _HomePageState extends State<HomePage> {
       ),
     ];
   }
-=======
-  ShakeDetector detector = ShakeDetector.autoStart(onPhoneShake: () {
-    print('The phone is shaking');
-  });
->>>>>>> cf8500e1dbee1516abafc4ca3093346f95eed50d
 
   @override
   Widget build(BuildContext context) {
