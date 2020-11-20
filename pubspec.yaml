@@ -1,5 +1,5 @@
 name: women_safety
-description: A new Flutter application.
+description: A women safety app
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -46,7 +46,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+
     - assets/icons/
+  #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

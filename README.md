@@ -1,6 +1,6 @@
 # women_safety
 
-A new Flutter application.
+A women safety app
 
 ## Getting Started
 

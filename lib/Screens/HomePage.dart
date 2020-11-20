@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:women_safety/configs/applications.dart';
+import 'package:fluro/fluro.dart';
+
+enum HomeOptions { nearByPolice, emergencyContacts, accountSettings, logout }
 
 class HomePage extends StatefulWidget {
   static const String id = 'home_page';
@@ -7,13 +12,63 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<PopupMenuItem<HomeOptions>> _popupMenus;
+  List<Widget> _actionButtons;
+  void _selectOption(HomeOptions option) {
+    switch (option) {
+      case HomeOptions.nearByPolice:
+        Navigator.pushNamed(context, 'hi');
+        break;
+      case HomeOptions.emergencyContacts:
+        Navigator.pushNamed(context, 'hi');
+        break;
+      case HomeOptions.accountSettings:
+        Navigator.pushNamed(context, 'hi');
+        break;
+      case HomeOptions.logout:
+        Navigator.pushNamed(context, 'hi');
+        break;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _actionButtons = <Widget>[
+      PopupMenuButton<HomeOptions>(
+        tooltip: "More options",
+        onSelected: _selectOption,
+        itemBuilder: (BuildContext context) {
+          return _popupMenus;
+        },
+      ),
+    ];
+
+    _popupMenus = [
+      PopupMenuItem<HomeOptions>(
+        child: Text("Nearby Police"),
+        value: HomeOptions.nearByPolice,
+      ),
+      PopupMenuItem<HomeOptions>(
+        child: Text("Emergency Contacts"),
+        value: HomeOptions.emergencyContacts,
+      ),
+      PopupMenuItem<HomeOptions>(
+        child: Text("Account Settings"),
+        value: HomeOptions.accountSettings,
+      ),
+      PopupMenuItem<HomeOptions>(
+        child: Text("Logout"),
+        value: HomeOptions.logout,
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('WOMEN SAFETY'),
-      ),
+      appBar: AppBar(title: Text('WOMEN SAFETY'), actions: _actionButtons),
       body: Stack(
         children: <Widget>[
           Container(
