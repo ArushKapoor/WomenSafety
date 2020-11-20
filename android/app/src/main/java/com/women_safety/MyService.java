@@ -29,14 +29,14 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         onTaskRemoved(intent);
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "shake")
-//                    .setContentText("This is running in background")
-//                    .setContentTitle("Flutter Background")
-//                    .setSmallIcon(R.drawable.ic_android_black_24dp);
-//
-//            startForeground(101, builder.build());
-//        }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "shake")
+                    .setContentText("This is running in background")
+                    .setContentTitle("Flutter Background")
+                    .setSmallIcon(R.drawable.ic_android_black_24dp);
+
+            startForeground(101, builder.build());
+        }
 //        Toast.makeText(getApplicationContext(),"This is a Service running in Background",
 //                Toast.LENGTH_SHORT).show();
 //        System.out.println(mainActivity.mSensorManager);
