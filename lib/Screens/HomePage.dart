@@ -64,12 +64,27 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 
+  static const platform = const MethodChannel('com.women_safety/background');
+
+  void printy() async {
+    String value;
+
+    try {
+      value = await platform.invokeMethod('printy');
+    } catch (e) {
+      print(e);
+    }
+
+    print(value);
+  }
+
   ShakeDetector detector = ShakeDetector.autoStart(onPhoneShake: () {
     print('The phone is shaking');
   });
 
   @override
   Widget build(BuildContext context) {
+    printy();
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(title: Text('WOMEN SAFETY'), actions: _actionButtons),
