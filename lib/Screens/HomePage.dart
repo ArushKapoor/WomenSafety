@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
+import 'package:shake/shake.dart';
 
 enum HomeOptions { nearByPolice, emergencyContacts, accountSettings, logout }
 
@@ -61,6 +63,10 @@ class _HomePageState extends State<HomePage> {
       ),
     ];
   }
+
+  ShakeDetector detector = ShakeDetector.autoStart(onPhoneShake: () {
+    print('The phone is shaking');
+  });
 
   @override
   Widget build(BuildContext context) {
