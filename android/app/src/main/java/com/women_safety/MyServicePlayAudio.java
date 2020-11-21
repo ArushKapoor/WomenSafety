@@ -12,40 +12,35 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.UUID;
 
 public class MyServicePlayAudio extends Service {
     public MyServicePlayAudio() {
     }
 
-    String pathSave = "";
-    MediaRecorder mediaRecorder;
-    MediaPlayer mediaPlayer;
-    private Handler mHandler = new Handler();
+    public static final int RequestPermissionCode = 1;
+    MediaPlayer mediaPlayer ;
+    Handler mHandler;
     MyServiceRecordAudio myServiceRecordAudio = new MyServiceRecordAudio();
+
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        onTaskRemoved(intent);
+
         mediaPlayer = new MediaPlayer();
-        try{
-            System.out.println(myServiceRecordAudio.pathSave);
-            System.out.println("Data source is about to be called");
-            mediaPlayer.setDataSource(myServiceRecordAudio.pathSave);
+        try {
+            mediaPlayer.setDataSource(myServiceRecordAudio.AudioSavePathInDevice);
             mediaPlayer.prepare();
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer){
-                    mediaPlayer.start();
-                }
-            });
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Toast.makeText(this, "Playing...", Toast.LENGTH_SHORT).show();
+        mediaPlayer.start();
+        Toast.makeText(this, "Recording Playing",
+                Toast.LENGTH_LONG).show();
 
-        mHandler.postDelayed(mToastRunnable, 15000);
+        mHandler.postDelayed(mToastRunnable, 5000);
 
         return START_STICKY;
     }
@@ -53,11 +48,13 @@ public class MyServicePlayAudio extends Service {
     private Runnable mToastRunnable = new Runnable() {
         @Override
         public void run() {
-            if(mediaPlayer != null) {
+            if(mediaPlayer != null){
                 mediaPlayer.stop();
                 mediaPlayer.release();
-                myServiceRecordAudio.setupMediaRecorder();
+                myServiceRecordAudio.MediaRecorderReady();
             }
+            Toast.makeText(MyServicePlayAudio.this, "Recording Completed",
+                    Toast.LENGTH_LONG).show();
         }
     };
 
