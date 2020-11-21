@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:women_safety/Auth/AuthenticationService.dart';
 import 'package:women_safety/Widgets/AuthBottomSheetBuilder.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   static const String id = 'sign_up_page';
@@ -284,6 +286,9 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                     child: MaterialButton(
                       onPressed: () {
                         //print(_phoneLoginController);
+                        context
+                            .read<AuthenticationService>()
+                            .loginUser(_phoneController.text.trim(), context);
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,

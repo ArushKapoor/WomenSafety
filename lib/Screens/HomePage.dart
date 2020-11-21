@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shake/shake.dart';
+import 'package:women_safety/Screens/AccountSettings.dart';
 import 'package:women_safety/Screens/EmergencyContacts.dart';
 import 'package:women_safety/Widgets/MapBottomSheetBuilder.dart';
 
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           Navigator.pushNamed(context, EmergencyContacts.id);
           break;
         case HomeOptions.accountSettings:
-          Navigator.pushNamed(context, 'hi');
+          Navigator.pushNamed(context, AccountSettings.id);
           break;
         case HomeOptions.logout:
           Navigator.pushNamed(context, 'hi');

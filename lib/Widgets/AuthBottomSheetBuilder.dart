@@ -43,19 +43,18 @@ class AuthBottomSheetBuilder extends StatelessWidget {
                   controller: _textEditingController,
                 ),
               ),
-              MaterialButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, HomePage.id);
-                },
-                color: Colors.black12,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    color: Color(0xff4A8FED),
-                  ),
-                  //width: _width * 0.3,
-                  padding: EdgeInsets.symmetric(
-                      horizontal: width * 0.1, vertical: width * 0.03),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  color: Color(0xff4A8FED),
+                ),
+                //width: _width * 0.3,
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.1, vertical: width * 0.03),
+                child: MaterialButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, HomePage.id);
+                  },
                   child: Text(
                     'SUBMIT',
                     style:

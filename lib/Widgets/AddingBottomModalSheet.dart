@@ -9,8 +9,7 @@ class AddingBottomSheetBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController _phoneNumberController = TextEditingController();
-    String newTask;
-    TextEditingController _textEditingController;
+    TextEditingController _textEditingController = TextEditingController();
     return Container(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -39,7 +38,7 @@ class AddingBottomSheetBuilder extends StatelessWidget {
               TextField(
                 controller: _textEditingController,
                 autofocus: true,
-                textAlign: TextAlign.center,
+                // textAlign: TextAlign.center,
                 cursorColor: Colors.lightBlueAccent,
                 cursorRadius: Radius.circular(3),
                 textInputAction: TextInputAction.done,
@@ -52,7 +51,7 @@ class AddingBottomSheetBuilder extends StatelessWidget {
               TextField(
                 controller: _phoneNumberController,
                 autofocus: true,
-                textAlign: TextAlign.center,
+                //textAlign: TextAlign.center,
                 cursorColor: Colors.lightBlueAccent,
                 cursorRadius: Radius.circular(3),
                 textInputAction: TextInputAction.done,
