@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:448244699839:android:fa9fb58453f10c58d7ac0a",
+        "mobilesdk_app_id": "1:448244699839:android:0fb4581031a7d406d7ac0a",
         "android_client_info": {
           "package_name": "com.women_safety"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "448244699839-bshb5hb4bgnu7ndjaqmndirttsjpuk1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.women_safety",
+            "certificate_hash": "d7e6c7022864b6c956f7189e62c94dc5a58fb41d"
+          }
+        },
         {
           "client_id": "448244699839-9mhaukiv4g93b2na1vb5dqr4f7erbnn0.apps.googleusercontent.com",
           "client_type": 3
