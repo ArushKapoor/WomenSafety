@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
@@ -25,7 +26,7 @@ import com.google.android.gms.tasks.Task;
 import io.flutter.app.FlutterActivity;
 
 
-public class Location extends FlutterActivity {
+public class MyLocation extends FlutterActivity {
 
     // initializing
     // FusedLocationProviderClient
@@ -82,6 +83,7 @@ public class Location extends FlutterActivity {
                                         else {
                                             latTextView = location.getLatitude()+ "";
                                             lonTextView = location.getLongitude()+ "";
+                                            System.out.println(latTextView);
                                         }
                                     }
                                 });
@@ -146,7 +148,7 @@ public class Location extends FlutterActivity {
         public void onLocationResult(
                 LocationResult locationResult)
         {
-            android.location.Location mLastLocation = locationResult.getLastLocation();
+            Location mLastLocation = locationResult.getLastLocation();
 //            android.location.Location mLastLocation = locationResult.getLastLocation();
             latTextView ="Latitude: "+ mLastLocation.getLatitude()+ "";
             lonTextView ="Longitude: "+ mLastLocation.getLongitude()+ "";
