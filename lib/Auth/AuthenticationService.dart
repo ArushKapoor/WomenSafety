@@ -22,7 +22,7 @@ class AuthenticationService {
         phoneNumber: phone,
         timeout: Duration(seconds: 60),
         verificationCompleted: (AuthCredential credential) async {
-          Navigator.of(context).pop();
+          //Navigator.of(context).pop();
 
           UserCredential result = await _auth.signInWithCredential(credential);
 
