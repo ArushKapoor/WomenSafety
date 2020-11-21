@@ -146,7 +146,7 @@ public class Location extends FlutterActivity {
         public void onLocationResult(
                 LocationResult locationResult)
         {
-            Location mLastLocation = locationResult.getLastLocation();
+            android.location.Location mLastLocation = locationResult.getLastLocation();
 //            android.location.Location mLastLocation = locationResult.getLastLocation();
             latTextView ="Latitude: "+ mLastLocation.getLatitude()+ "";
             lonTextView ="Longitude: "+ mLastLocation.getLongitude()+ "";
