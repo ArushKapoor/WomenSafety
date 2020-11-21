@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter/services.dart';
 import 'package:shake/shake.dart';
+import 'package:women_safety/Screens/EmergencyContacts.dart';
+import 'package:women_safety/Widgets/MapBottomSheetBuilder.dart';
 
 enum HomeOptions { nearByPolice, emergencyContacts, accountSettings, logout }
 
@@ -12,56 +12,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<PopupMenuItem<HomeOptions>> _popupMenus;
-  List<Widget> _actionButtons;
-  void _selectOption(HomeOptions option) {
-    switch (option) {
-      case HomeOptions.nearByPolice:
-        Navigator.pushNamed(context, 'hi');
-        break;
-      case HomeOptions.emergencyContacts:
-        Navigator.pushNamed(context, 'hi');
-        break;
-      case HomeOptions.accountSettings:
-        Navigator.pushNamed(context, 'hi');
-        break;
-      case HomeOptions.logout:
-        Navigator.pushNamed(context, 'hi');
-        break;
-    }
-  }
+  bool recStarted = false;
 
   @override
   void initState() {
     super.initState();
-    _actionButtons = <Widget>[
-      PopupMenuButton<HomeOptions>(
-        tooltip: "More options",
-        onSelected: _selectOption,
-        itemBuilder: (BuildContext context) {
-          return _popupMenus;
-        },
-      ),
-    ];
-
-    _popupMenus = [
-      PopupMenuItem<HomeOptions>(
-        child: Text("Nearby Police"),
-        value: HomeOptions.nearByPolice,
-      ),
-      PopupMenuItem<HomeOptions>(
-        child: Text("Emergency Contacts"),
-        value: HomeOptions.emergencyContacts,
-      ),
-      PopupMenuItem<HomeOptions>(
-        child: Text("Account Settings"),
-        value: HomeOptions.accountSettings,
-      ),
-      PopupMenuItem<HomeOptions>(
-        child: Text("Logout"),
-        value: HomeOptions.logout,
-      ),
-    ];
   }
 
   ShakeDetector detector = ShakeDetector.autoStart(onPhoneShake: () {
@@ -70,9 +25,84 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //recStarted = true;
+    double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
+    void _selectOption(HomeOptions option) {
+      switch (option) {
+        case HomeOptions.nearByPolice:
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            elevation: 10,
+            enableDrag: true,
+            builder: (context) => SingleChildScrollView(
+              child: MapBottomSheetBuilder(height: _height, width: _width),
+            ),
+          );
+          break;
+        case HomeOptions.emergencyContacts:
+          Navigator.pushNamed(context, EmergencyContacts.id);
+          break;
+        case HomeOptions.accountSettings:
+          Navigator.pushNamed(context, 'hi');
+          break;
+        case HomeOptions.logout:
+          Navigator.pushNamed(context, 'hi');
+          break;
+      }
+    }
+
     return Scaffold(
-      appBar: AppBar(title: Text('WOMEN SAFETY'), actions: _actionButtons),
+      appBar: AppBar(
+        title: Text('WOMEN SAFETY'),
+        actions: [
+          PopupMenuButton<HomeOptions>(
+            tooltip: "More options",
+            onSelected: _selectOption,
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem<HomeOptions>(
+                  child: PopUpItem(
+                    height: _height,
+                    width: _width,
+                    iconName: 'Near By Police',
+                    iconUrl: 'assets/icons/police.jpeg',
+                  ),
+                  value: HomeOptions.nearByPolice,
+                ),
+                PopupMenuItem<HomeOptions>(
+                  child: PopUpItem(
+                    height: _height,
+                    iconName: 'Emergency Contacts',
+                    iconUrl: 'assets/icons/emergencyCall.jpeg',
+                    width: _width,
+                  ),
+                  value: HomeOptions.emergencyContacts,
+                ),
+                PopupMenuItem<HomeOptions>(
+                  child: PopUpItem(
+                    height: _height,
+                    iconName: 'Account Settings',
+                    iconUrl: 'assets/icons/account.jpeg',
+                    width: _width,
+                  ),
+                  value: HomeOptions.accountSettings,
+                ),
+                PopupMenuItem<HomeOptions>(
+                  child: PopUpItem(
+                    height: _height,
+                    width: _width,
+                    iconName: 'Logout',
+                    iconUrl: 'assets/icons/logout.jpeg',
+                  ),
+                  value: HomeOptions.logout,
+                ),
+              ];
+            },
+          ),
+        ],
+      ),
       body: Stack(
         children: <Widget>[
           Container(
@@ -125,31 +155,142 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.black),
+                  child: GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        elevation: 10,
+                        enableDrag: true,
+                        builder: (context) => SingleChildScrollView(
+                          child: MapBottomSheetBuilder(
+                              height: _height, width: _width),
                         ),
-                        height: 30,
-                        width: 30,
-                        child: Icon(
-                          Icons.keyboard_arrow_up,
-                          size: 34,
+                      );
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.black, width: 2.0),
+                          ),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Icon(
+                              Icons.keyboard_arrow_up,
+                              size: 34,
+                            ),
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 25.0,
-                      ),
-                    ],
+                        SizedBox(
+                          height: _height * 0.025,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
+          if (recStarted)
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                padding: EdgeInsets.all(_height * 0.04),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  ),
+                ),
+                width: _width,
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(
+                    horizontal: _width * 0.1, vertical: _height * 0.2),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Please make sure if it really is an emergency!',
+                      style: TextStyle(
+                          fontSize: _height * 0.028,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(
+                      height: _height * 0.04,
+                    ),
+                    Icon(
+                      Icons.mic,
+                      size: _height * 0.09,
+                    ),
+                    SizedBox(
+                      height: _height * 0.04,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'RECORDING AUDIO',
+                          style: TextStyle(fontSize: _height * 0.023),
+                        ),
+                        SizedBox(
+                          width: _width * 0.1,
+                        ),
+                        Text('15s'),
+                      ],
+                    ),
+                    SizedBox(
+                      height: _height * 0.04,
+                    ),
+                    Container(
+                      color: Colors.cyan,
+                      child: MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            recStarted = false;
+                            print(recStarted);
+                          });
+                        },
+                        child: Text(
+                          'CANCEL',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class PopUpItem extends StatelessWidget {
+  final double width;
+  final double height;
+  final String iconUrl;
+  final String iconName;
+  PopUpItem({this.height, this.width, this.iconName, this.iconUrl});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width * 0.5,
+      child: Row(
+        children: [
+          Image(
+            image: AssetImage(iconUrl),
+            height: height * 0.032,
+          ),
+          SizedBox(
+            width: width * 0.01,
+          ),
+          Text(iconName)
         ],
       ),
     );
