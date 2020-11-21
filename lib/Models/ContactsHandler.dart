@@ -14,7 +14,7 @@ class ContactsHandler extends ChangeNotifier {
     notifyListeners();
   }
 
-  UnmodifiableListView get contacts {
-    return UnmodifiableListView(contacts);
+  UnmodifiableListView<Contact> get contacts {
+    return UnmodifiableListView(_contacts);
   }
 }
