@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:women_safety/Screens/AudioRecordPage.dart';
 import 'package:women_safety/Screens/HomePage.dart';
 import 'package:women_safety/Screens/SignUpPage.dart';
 
@@ -15,8 +16,9 @@ class MyApp extends StatelessWidget {
       routes: {
         SignUpPage.id: (context) => SignUpPage(),
         HomePage.id: (context) => HomePage(),
+        AudioRecordPage.id: (context) => AudioRecordPage(),
       },
-      initialRoute: HomePage.id,
+      initialRoute: AudioRecordPage.id,
     );
   }
 }

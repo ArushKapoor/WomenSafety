@@ -17,8 +17,8 @@ import androidx.core.app.NotificationCompat;
 
 import java.util.Objects;
 
-public class MyService extends Service {
-    public MyService() {
+public class MyServiceBackground extends Service {
+    public MyServiceBackground() {
     }
 
     public SensorManager mSensorManager;
@@ -37,12 +37,9 @@ public class MyService extends Service {
 
             startForeground(101, builder.build());
         }
-//        Toast.makeText(getApplicationContext(),"This is a Service running in Background",
-//                Toast.LENGTH_SHORT).show();
-//        System.out.println(mainActivity.mSensorManager);
+
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-//        Objects.requireNonNull(mSensorManager).registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-//                SensorManager.SENSOR_DELAY_NORMAL);
+
         mAccel = 10f;
         mAccelCurrent = SensorManager.GRAVITY_EARTH;
         mAccelLast = SensorManager.GRAVITY_EARTH;
