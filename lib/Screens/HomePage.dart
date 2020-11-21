@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shake/shake.dart';
 import 'package:women_safety/Screens/AccountSettings.dart';
 import 'package:women_safety/Screens/EmergencyContacts.dart';
@@ -20,12 +21,27 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  ShakeDetector detector = ShakeDetector.autoStart(onPhoneShake: () {
-    print('The phone is shaking');
-  });
+  static const platform = const MethodChannel('com.women_safety/background');
+
+  void printy() async {
+    String value;
+
+    try {
+      value = await platform.invokeMethod('printy');
+    } catch (e) {
+      print(e);
+    }
+
+    print(value);
+  }
+
+  // ShakeDetector detector = ShakeDetector.autoStart(onPhoneShake: () {
+  //   print('The phone is shaking');
+  // });
 
   @override
   Widget build(BuildContext context) {
+    printy();
     //recStarted = true;
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
